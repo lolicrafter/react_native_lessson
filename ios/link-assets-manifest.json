@@ -1,0 +1,41 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/AlimamaFangYuanTi.ttf",
+      "sha1": "cf464381db75f24343d51f3d454efe277d696b0e"
+    },
+    {
+      "path": "src/assets/fonts/xuandong.ttf",
+      "sha1": "2d4c1f28d176d75c1286ad38b20bd062a339769c"
+    },
+    {
+      "path": "src/assets/fonts/yangrendong-Bold.ttf",
+      "sha1": "21eb4c8e9b8988f55b456608773b3e3d30435d40"
+    },
+    {
+      "path": "src/assets/fonts/yangrendong-Extralight.ttf",
+      "sha1": "40fb91703138d474dbe75405058b170063b743fe"
+    },
+    {
+      "path": "src/assets/fonts/yangrendong-Heavy.ttf",
+      "sha1": "eae48ec81d60009b789c7d218d9b8211c6d71a83"
+    },
+    {
+      "path": "src/assets/fonts/yangrendong-Light.ttf",
+      "sha1": "277e5fc19e2e896a56ba29c26c0042dc9e501c6e"
+    },
+    {
+      "path": "src/assets/fonts/yangrendong-Medium.ttf",
+      "sha1": "3d0c0906cad1b024a2a2ec2a2b55934423e98a10"
+    },
+    {
+      "path": "src/assets/fonts/yangrendong-Regular.ttf",
+      "sha1": "37cb008a6a132337701aaf67f13d22738680918d"
+    },
+    {
+      "path": "src/assets/fonts/yangrendong-Semibold.ttf",
+      "sha1": "8c37623416fd83aeb54344c9cca40df0e2edecff"
+    }
+  ]
+}

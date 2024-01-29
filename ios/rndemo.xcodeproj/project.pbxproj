@@ -14,6 +14,15 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-rndemo-rndemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-rndemo-rndemoTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		F1BE9C6F61754329BA8212D6 /* xuandong.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C757D4AE30B4A718E453A30 /* xuandong.ttf */; };
+		0E24D4027235463EA631CC6A /* AlimamaFangYuanTi.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1627956C0380458284686566 /* AlimamaFangYuanTi.ttf */; };
+		B267719FF13B487BB58561DE /* yangrendong-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A3B84D96D9084CDE8EF0C889 /* yangrendong-Bold.ttf */; };
+		6E344D5D5AFA46FDA4FE3466 /* yangrendong-Extralight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D1B4D3E062E4411AC9DBAAE /* yangrendong-Extralight.ttf */; };
+		CBF8F12BD9F04FD3AA88ED15 /* yangrendong-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F2876FEF734B49C497E382D5 /* yangrendong-Heavy.ttf */; };
+		0C9BC16F8DB048398D0EF464 /* yangrendong-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B6567464606C4625B5FBD24A /* yangrendong-Light.ttf */; };
+		CAE669EC563849CC9EF0B253 /* yangrendong-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6BFCC1E10BDB4038AF66E62B /* yangrendong-Medium.ttf */; };
+		71E5CB24B89B4772BD95FFBE /* yangrendong-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EB104C28DFC404586F88552 /* yangrendong-Regular.ttf */; };
+		3D631D50FD2940518D8F34BE /* yangrendong-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A2AA1315B4044CDEAE581A0E /* yangrendong-Semibold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +53,15 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = rndemo/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-rndemo-rndemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rndemo-rndemoTests.release.xcconfig"; path = "Target Support Files/Pods-rndemo-rndemoTests/Pods-rndemo-rndemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		6C757D4AE30B4A718E453A30 /* xuandong.ttf */ = {isa = PBXFileReference; name = "xuandong.ttf"; path = "../src/assets/fonts/xuandong.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1627956C0380458284686566 /* AlimamaFangYuanTi.ttf */ = {isa = PBXFileReference; name = "AlimamaFangYuanTi.ttf"; path = "../src/assets/fonts/AlimamaFangYuanTi.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A3B84D96D9084CDE8EF0C889 /* yangrendong-Bold.ttf */ = {isa = PBXFileReference; name = "yangrendong-Bold.ttf"; path = "../src/assets/fonts/yangrendong-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2D1B4D3E062E4411AC9DBAAE /* yangrendong-Extralight.ttf */ = {isa = PBXFileReference; name = "yangrendong-Extralight.ttf"; path = "../src/assets/fonts/yangrendong-Extralight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F2876FEF734B49C497E382D5 /* yangrendong-Heavy.ttf */ = {isa = PBXFileReference; name = "yangrendong-Heavy.ttf"; path = "../src/assets/fonts/yangrendong-Heavy.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B6567464606C4625B5FBD24A /* yangrendong-Light.ttf */ = {isa = PBXFileReference; name = "yangrendong-Light.ttf"; path = "../src/assets/fonts/yangrendong-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6BFCC1E10BDB4038AF66E62B /* yangrendong-Medium.ttf */ = {isa = PBXFileReference; name = "yangrendong-Medium.ttf"; path = "../src/assets/fonts/yangrendong-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7EB104C28DFC404586F88552 /* yangrendong-Regular.ttf */ = {isa = PBXFileReference; name = "yangrendong-Regular.ttf"; path = "../src/assets/fonts/yangrendong-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A2AA1315B4044CDEAE581A0E /* yangrendong-Semibold.ttf */ = {isa = PBXFileReference; name = "yangrendong-Semibold.ttf"; path = "../src/assets/fonts/yangrendong-Semibold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +140,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				56F8703DB6AA4D90B0402ECB /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -147,6 +166,23 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		56F8703DB6AA4D90B0402ECB /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				6C757D4AE30B4A718E453A30 /* xuandong.ttf */,
+				1627956C0380458284686566 /* AlimamaFangYuanTi.ttf */,
+				A3B84D96D9084CDE8EF0C889 /* yangrendong-Bold.ttf */,
+				2D1B4D3E062E4411AC9DBAAE /* yangrendong-Extralight.ttf */,
+				F2876FEF734B49C497E382D5 /* yangrendong-Heavy.ttf */,
+				B6567464606C4625B5FBD24A /* yangrendong-Light.ttf */,
+				6BFCC1E10BDB4038AF66E62B /* yangrendong-Medium.ttf */,
+				7EB104C28DFC404586F88552 /* yangrendong-Regular.ttf */,
+				A2AA1315B4044CDEAE581A0E /* yangrendong-Semibold.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -243,6 +279,15 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				F1BE9C6F61754329BA8212D6 /* xuandong.ttf in Resources */,
+				0E24D4027235463EA631CC6A /* AlimamaFangYuanTi.ttf in Resources */,
+				B267719FF13B487BB58561DE /* yangrendong-Bold.ttf in Resources */,
+				6E344D5D5AFA46FDA4FE3466 /* yangrendong-Extralight.ttf in Resources */,
+				CBF8F12BD9F04FD3AA88ED15 /* yangrendong-Heavy.ttf in Resources */,
+				0C9BC16F8DB048398D0EF464 /* yangrendong-Light.ttf in Resources */,
+				CAE669EC563849CC9EF0B253 /* yangrendong-Medium.ttf in Resources */,
+				71E5CB24B89B4772BD95FFBE /* yangrendong-Regular.ttf in Resources */,
+				3D631D50FD2940518D8F34BE /* yangrendong-Semibold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
