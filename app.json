@@ -1,4 +1,8 @@
 {
   "name": "rndemo",
-  "displayName": "rndemo"
+  "displayName": "萌物书屋",
+  "expo": {
+    "name": "萌物书屋",
+    "slug": "萌物书屋-萌萌人小说站"
+  }
 }
