@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, TouchableHighlight} from 'react-native';
-import {StyledView, StyledText} from './NativeWindComponent';
+import {StyledView, StyledText} from '../NativeWindComponent';
 
 const styles = StyleSheet.create({
   root: {

@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Pressable,
   PressableProps,
+  ScrollView,
 } from 'react-native';
 import {styled, StyledProps} from 'nativewind';
 
@@ -37,6 +38,7 @@ const styles = StyleSheet.create({
 });
 import type {ComponentProps} from 'react';
 import {TextStyle as RNTextStyle} from 'react-native';
+
 type TextProps = ComponentProps<typeof Text>;
 type TextInputProps = ComponentProps<typeof TextInput>;
 
@@ -85,6 +87,7 @@ function processStyle(style: StyleProp<RNTextStyle>) {
   }
 }
 
+export const StyledScrollView = styled(ScrollView);
 export const StyledView = styled(View);
 export const StyledImage = styled(Image);
 export const StyledImageBackground = styled(ImageBackground);

@@ -3,7 +3,7 @@ import {
   StyledText,
   StyledTouchableOpacity,
   StyledView,
-} from './NativeWindComponent';
+} from '../NativeWindComponent';
 
 function TouchableOpacityDemo() {
   return (

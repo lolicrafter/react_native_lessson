@@ -5,8 +5,8 @@ import {
   StyledImageBackground,
   StyledText,
   StyledView,
-} from './NativeWindComponent';
-import {imageUrl} from '../constants/Uri';
+} from '../NativeWindComponent';
+import {imageUrl} from '../../constants/Uri';
 
 function ImageBackgroundDemo() {
   return (
@@ -20,7 +20,7 @@ function ImageBackgroundDemo() {
           imageStyle={{borderRadius: 10, resizeMode: 'cover'}}
           source={{uri: imageUrl}}>
           <StyledText className={'text-[34px] text-yellow-500'}>
-            {`我在\n`}里面
+            {'我在\n'}里面
           </StyledText>
           <StyledImage
             source={{

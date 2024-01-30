@@ -1,5 +1,5 @@
 import {Pressable, SafeAreaView} from 'react-native';
-import {StyledPressable, StyledText, StyledView} from './NativeWindComponent';
+import {StyledPressable, StyledText, StyledView} from '../NativeWindComponent';
 import {Button} from '@rneui/themed';
 
 function PressableDemo() {

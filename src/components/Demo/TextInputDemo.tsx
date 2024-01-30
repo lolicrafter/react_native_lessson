@@ -1,5 +1,5 @@
 import {SafeAreaView} from 'react-native';
-import {StyledText, StyledTextInput, StyledView} from './NativeWindComponent';
+import {StyledText, StyledTextInput, StyledView} from '../NativeWindComponent';
 import {useState} from 'react';
 
 function TextInputDemo() {

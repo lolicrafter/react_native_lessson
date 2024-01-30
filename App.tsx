@@ -24,7 +24,8 @@ import {
   // LearnMoreLinks,
   // ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import PressableDemo from './src/components/PressableDemo';
+// import PressableDemo from './src/components/Demo/PressableDemo';
+import ScrollViewDemo from './src/components/Demo/ScrollViewDemo';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -93,7 +94,8 @@ function App(): React.JSX.Element {
         {/*<TextInputDemo />*/}
         {/*<TouchableOpacityDemo />*/}
         {/*<ButtonDemo />*/}
-        <PressableDemo />
+        {/*<PressableDemo />*/}
+        <ScrollViewDemo />
         {/*<Header />*/}
         {/*<View*/}
         {/*  style={{*/}

@@ -1,8 +1,8 @@
 import React from 'react';
-import {StyledImage, StyledText, StyledView} from './NativeWindComponent';
+import {StyledImage, StyledText, StyledView} from '../NativeWindComponent';
 
-import icon from '../assets/icon.png';
-import {imageUrl} from '../constants/Uri';
+import icon from '../../assets/icon.png';
+import {imageUrl} from '../../constants/Uri';
 
 function ImageDemo() {
   return (

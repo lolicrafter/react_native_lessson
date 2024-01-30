@@ -1,5 +1,5 @@
 import {SafeAreaView} from 'react-native';
-import {StyledButton, StyledText, StyledView} from './NativeWindComponent';
+import {StyledButton, StyledText, StyledView} from '../NativeWindComponent';
 
 function ButtonDemo() {
   return (

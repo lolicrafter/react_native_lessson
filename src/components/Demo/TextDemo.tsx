@@ -1,6 +1,6 @@
 import React from 'react';
 import {SafeAreaView} from 'react-native';
-import {StyledText} from './NativeWindComponent';
+import {StyledText} from '../NativeWindComponent';
 
 function TextDemo() {
   return (
