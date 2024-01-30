@@ -33,7 +33,8 @@ type SectionProps = PropsWithChildren<{
 // import TextDemo from './src/components/TextDemo';
 // import ImageDemo from "./src/components/ImageDemo";
 // import ImageBackgroundDemo from "./src/components/ImageBackgroundDemo";
-import TextInputDemo from './src/components/TextInputDemo';
+// import TextInputDemo from './src/components/TextInputDemo';
+import TouchableOpacityDemo from './src/components/TouchableOpacityDemo';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function Section({children, title}: SectionProps): React.JSX.Element {
@@ -87,7 +88,8 @@ function App(): React.JSX.Element {
         {/*<TextDemo />*/}
         {/*<ImageDemo />*/}
         {/*<ImageBackgroundDemo />*/}
-        <TextInputDemo />
+        {/*<TextInputDemo />*/}
+        <TouchableOpacityDemo />
         {/*<Header />*/}
         {/*<View*/}
         {/*  style={{*/}

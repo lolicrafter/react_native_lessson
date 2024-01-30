@@ -7,6 +7,7 @@ import {
   Image,
   ImageBackground,
   TextInput,
+  TouchableOpacity,
 } from 'react-native';
 import {styled, StyledProps} from 'nativewind';
 
@@ -85,6 +86,7 @@ function processStyle(style: StyleProp<RNTextStyle>) {
 export const StyledView = styled(View);
 export const StyledImage = styled(Image);
 export const StyledImageBackground = styled(ImageBackground);
+export const StyledTouchableOpacity = styled(TouchableOpacity);
 export const StyledText = ({style, ...props}: StyledProps<TextProps>) => {
   const {rest, weightedFontFamily} = processStyle(style);
   return <Text style={[rest, weightedFontFamily]} {...props} />;
