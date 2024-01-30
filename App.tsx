@@ -24,8 +24,9 @@ import {
   // LearnMoreLinks,
   // ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import FlatListDemo from './src/components/Demo/FlatListDemo';
 // import PressableDemo from './src/components/Demo/PressableDemo';
-import ScrollViewDemo from './src/components/Demo/ScrollViewDemo';
+// import ScrollViewDemo from './src/components/Demo/ScrollViewDemo';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -71,6 +72,8 @@ function App(): React.JSX.Element {
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    width: '100%',
+    height: '100%',
   };
 
   useEffect(() => {
@@ -95,7 +98,8 @@ function App(): React.JSX.Element {
         {/*<TouchableOpacityDemo />*/}
         {/*<ButtonDemo />*/}
         {/*<PressableDemo />*/}
-        <ScrollViewDemo />
+        {/*<ScrollViewDemo />*/}
+        <FlatListDemo />
         {/*<Header />*/}
         {/*<View*/}
         {/*  style={{*/}

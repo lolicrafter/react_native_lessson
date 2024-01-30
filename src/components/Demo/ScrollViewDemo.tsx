@@ -76,7 +76,9 @@ function ScrollViewDemo() {
         <Button
           buttonStyle={{backgroundColor: 'red', width: 100}}
           onPress={() => {
-            ref.current?.scrollTo({x: 0, y: 330, animated: true});
+            // ref.current
+            //   ? ref.current.scrollTo({x: 0, y: 330, animated: true})
+            //   : undefined;
           }}>
           Button
         </Button>
