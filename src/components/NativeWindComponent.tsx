@@ -33,14 +33,15 @@ const TextStyle = styled(Text) as React.ComponentType<StyledProps<TextProps>>;
 export const StyledView = styled(View);
 
 export const StyledText = ({style, ...props}: StyledProps<TextProps>) => {
+  const styleArray = Array.isArray(style) ? style : [style];
   if (!style) {
-    return <Text style={[...style, styles.regular]} {...props} />;
+    return <Text style={[...styleArray, styles.regular]} {...props} />;
   }
 
   const {fontWeight, ...rest} = StyleSheet.flatten(style);
 
   if (!fontWeight) {
-    return <Text style={[...style, styles.regular]} {...props} />;
+    return <Text style={[...styleArray, styles.regular]} {...props} />;
   }
 
   let weightedFontFamily: StyleProp<RNTextStyle> | undefined;
