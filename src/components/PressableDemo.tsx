@@ -1,5 +1,6 @@
 import {Pressable, SafeAreaView} from 'react-native';
 import {StyledPressable, StyledText, StyledView} from './NativeWindComponent';
+import {Button} from '@rneui/themed';
 
 function PressableDemo() {
   return (
@@ -34,12 +35,30 @@ function PressableDemo() {
           }}>
           {({pressed}) => {
             return (
-              <StyledText className={'text-2xl text-white'}>
+              <StyledText
+                className={`text-2xl text-white text-center ${
+                  pressed ? 'bg-sky-500-300' : 'bg-rose-500'
+                }`}>
                 Pressable --pressed: {pressed.toString()}
               </StyledText>
             );
           }}
         </StyledPressable>
+        <Button
+          title="Button"
+          buttonStyle={{
+            width: 100,
+            height: 50,
+          }}
+          // containerStyle={{
+          //   width: 100,
+          //   height: 50,
+          //   margin: 10,
+          // }}
+          color="success"
+          radius="15"
+          onPress={() => console.log('Button pressed')}
+        />
       </StyledView>
     </SafeAreaView>
   );
