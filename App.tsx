@@ -30,7 +30,10 @@ type SectionProps = PropsWithChildren<{
 }>;
 
 // import ViewDemo from './src/components/ViewDemo';
-import TextDemo from './src/components/TextDemo';
+// import TextDemo from './src/components/TextDemo';
+// import ImageDemo from "./src/components/ImageDemo";
+// import ImageBackgroundDemo from "./src/components/ImageBackgroundDemo";
+import TextInputDemo from './src/components/TextInputDemo';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function Section({children, title}: SectionProps): React.JSX.Element {
@@ -81,7 +84,10 @@ function App(): React.JSX.Element {
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
         {/*<ViewDemo />*/}
-        <TextDemo />
+        {/*<TextDemo />*/}
+        {/*<ImageDemo />*/}
+        {/*<ImageBackgroundDemo />*/}
+        <TextInputDemo />
         {/*<Header />*/}
         {/*<View*/}
         {/*  style={{*/}

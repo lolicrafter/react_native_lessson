@@ -1,4 +1,13 @@
-import {Text, View, Button, StyleSheet, StyleProp} from 'react-native';
+import {
+  Text,
+  View,
+  Button,
+  StyleSheet,
+  StyleProp,
+  Image,
+  ImageBackground,
+  TextInput,
+} from 'react-native';
 import {styled, StyledProps} from 'nativewind';
 
 const Typography = {
@@ -25,56 +34,67 @@ const styles = StyleSheet.create({
 });
 import type {ComponentProps} from 'react';
 import {TextStyle as RNTextStyle} from 'react-native';
-
 type TextProps = ComponentProps<typeof Text>;
+type TextInputProps = ComponentProps<typeof TextInput>;
 
-const TextStyle = styled(Text) as React.ComponentType<StyledProps<TextProps>>;
-
-export const StyledView = styled(View);
-
-export const StyledText = ({style, ...props}: StyledProps<TextProps>) => {
-  const styleArray = Array.isArray(style) ? style : [style];
-  if (!style) {
-    return <Text style={[...styleArray, styles.regular]} {...props} />;
-  }
-
-  const {fontWeight, ...rest} = StyleSheet.flatten(style);
-
-  if (!fontWeight) {
-    return <Text style={[...styleArray, styles.regular]} {...props} />;
-  }
-
+function processStyle(style: StyleProp<RNTextStyle>) {
+  // const styleArray = Array.isArray(style) ? style : [style];
   let weightedFontFamily: StyleProp<RNTextStyle> | undefined;
 
-  switch (fontWeight) {
-    case '100':
-      weightedFontFamily = styles.thin;
-      break;
-    case '200':
-      weightedFontFamily = styles.extraLight;
-      break;
-    case '300':
-      weightedFontFamily = styles.light;
-      break;
-    case '500':
-      weightedFontFamily = styles.medium;
-      break;
-    case '600':
-      weightedFontFamily = styles.semiBold;
-      break;
-    case 'bold':
-    case '700':
-      weightedFontFamily = styles.bold;
-      break;
-    case '800':
-      weightedFontFamily = styles.extraBold;
-      break;
-    case '900':
-      weightedFontFamily = styles.black;
-      break;
-    default:
+  if (style) {
+    const {fontWeight, ...rest} = StyleSheet.flatten(style);
+    if (fontWeight) {
+      switch (fontWeight) {
+        case '100':
+          weightedFontFamily = styles.thin;
+          break;
+        case '200':
+          weightedFontFamily = styles.extraLight;
+          break;
+        case '300':
+          weightedFontFamily = styles.light;
+          break;
+        case '500':
+          weightedFontFamily = styles.medium;
+          break;
+        case '600':
+          weightedFontFamily = styles.semiBold;
+          break;
+        case 'bold':
+        case '700':
+          weightedFontFamily = styles.bold;
+          break;
+        case '800':
+          weightedFontFamily = styles.extraBold;
+          break;
+        case '900':
+          weightedFontFamily = styles.black;
+          break;
+        default:
+          weightedFontFamily = styles.regular;
+      }
+    } else {
       weightedFontFamily = styles.regular;
+    }
+    return {rest, weightedFontFamily};
+  } else {
+    return {rest: {}, weightedFontFamily: styles.regular};
   }
-  return <TextStyle style={[rest, weightedFontFamily]} {...props} />;
+}
+
+export const StyledView = styled(View);
+export const StyledImage = styled(Image);
+export const StyledImageBackground = styled(ImageBackground);
+export const StyledText = ({style, ...props}: StyledProps<TextProps>) => {
+  const {rest, weightedFontFamily} = processStyle(style);
+  return <Text style={[rest, weightedFontFamily]} {...props} />;
 };
+export const StyledTextInput = ({
+  style,
+  ...props
+}: StyledProps<TextInputProps>) => {
+  const {rest, weightedFontFamily} = processStyle(style);
+  return <TextInput style={[rest, weightedFontFamily]} {...props} />;
+};
+
 export const StyledButton = styled(Button);
