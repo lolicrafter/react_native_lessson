@@ -24,6 +24,7 @@ import {
   // LearnMoreLinks,
   // ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import PressableDemo from './src/components/PressableDemo';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -34,7 +35,8 @@ type SectionProps = PropsWithChildren<{
 // import ImageDemo from "./src/components/ImageDemo";
 // import ImageBackgroundDemo from "./src/components/ImageBackgroundDemo";
 // import TextInputDemo from './src/components/TextInputDemo';
-import TouchableOpacityDemo from './src/components/TouchableOpacityDemo';
+// import TouchableOpacityDemo from './src/components/TouchableOpacityDemo';
+// import ButtonDemo from './src/components/ButtonDemo';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function Section({children, title}: SectionProps): React.JSX.Element {
@@ -89,7 +91,9 @@ function App(): React.JSX.Element {
         {/*<ImageDemo />*/}
         {/*<ImageBackgroundDemo />*/}
         {/*<TextInputDemo />*/}
-        <TouchableOpacityDemo />
+        {/*<TouchableOpacityDemo />*/}
+        {/*<ButtonDemo />*/}
+        <PressableDemo />
         {/*<Header />*/}
         {/*<View*/}
         {/*  style={{*/}

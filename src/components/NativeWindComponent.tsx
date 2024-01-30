@@ -8,6 +8,8 @@ import {
   ImageBackground,
   TextInput,
   TouchableOpacity,
+  Pressable,
+  PressableProps,
 } from 'react-native';
 import {styled, StyledProps} from 'nativewind';
 
@@ -100,3 +102,11 @@ export const StyledTextInput = ({
 };
 
 export const StyledButton = styled(Button);
+
+interface PressablePropsCustom extends PressableProps {
+  className?: string;
+}
+
+export const StyledPressable: React.ComponentType<
+  PressablePropsCustom & React.RefAttributes<View>
+> = Pressable;
