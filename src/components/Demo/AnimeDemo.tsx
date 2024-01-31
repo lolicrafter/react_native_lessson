@@ -18,12 +18,20 @@ const styles = StyleSheet.create({
 
 function AnimeDemo() {
   const marginLeft = useRef(new Animated.Value(30)).current;
+  const rotate = useRef(new Animated.Value(0)).current;
+  const rotateValue = rotate.interpolate({
+    inputRange: [0, 360],
+    outputRange: ['0deg', '360deg'],
+  });
+  const scale = useRef(new Animated.Value(1)).current;
+  const opacity = useRef(new Animated.Value(1)).current;
 
   return (
     <StyledSafeAreaView className=" ">
       <StyledView className=" ">
         <StyledText className="text-2xl">AnimeDemo</StyledText>
         <Button
+          containerStyle={{margin: 20}}
           buttonStyle={{
             backgroundColor: 'red',
             borderRadius: 10,
@@ -38,9 +46,25 @@ function AnimeDemo() {
               duration: 1000,
               useNativeDriver: false,
             }).start();
+            Animated.timing(rotate, {
+              toValue: 360,
+              duration: 1000,
+              useNativeDriver: false,
+            }).start();
+            Animated.timing(scale, {
+              toValue: 2,
+              duration: 1000,
+              useNativeDriver: false,
+            }).start();
+            Animated.timing(opacity, {
+              toValue: 0.1,
+              duration: 1000,
+              useNativeDriver: false,
+            }).start();
           }}
         />
         <Button
+          containerStyle={{margin: 20}}
           buttonStyle={{
             backgroundColor: 'blue',
             borderRadius: 10,
@@ -55,6 +79,21 @@ function AnimeDemo() {
               duration: 1000,
               useNativeDriver: false,
             }).start();
+            Animated.timing(rotate, {
+              toValue: 0,
+              duration: 1000,
+              useNativeDriver: false,
+            }).start();
+            Animated.timing(scale, {
+              toValue: 1,
+              duration: 1000,
+              useNativeDriver: false,
+            }).start();
+            Animated.timing(opacity, {
+              toValue: 1,
+              duration: 1000,
+              useNativeDriver: false,
+            }).start();
           }}
         />
       </StyledView>
@@ -64,6 +103,8 @@ function AnimeDemo() {
           styles.animatedView,
           {
             marginLeft: marginLeft,
+            transform: [{rotate: rotateValue}, {scale: scale}],
+            opacity: opacity,
           } as any,
         ]}
       />
