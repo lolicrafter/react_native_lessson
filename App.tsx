@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, {useEffect} from 'react';
+import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
@@ -78,10 +78,10 @@ function App(): React.JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  useEffect(() => {
-    const bool = Math.random() > 0.5;
-    console.log('bool', bool);
-  }, []);
+  // useEffect(() => {
+  //   const bool = Math.random() > 0.5;
+  //   console.log('bool', bool);
+  // }, []);
 
   return (
     <SafeAreaView style={backgroundStyle}>

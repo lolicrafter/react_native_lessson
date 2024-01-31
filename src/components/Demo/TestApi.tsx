@@ -5,12 +5,15 @@ import {
 } from '../NativeWindComponent';
 import {
   Alert,
-  Linking,
+  // BackHandler,
+  // Linking,
   Platform,
   StyleSheet,
   useWindowDimensions,
 } from 'react-native';
 import {Button} from '@rneui/themed';
+// import {useEffect} from 'react';
+import {useBackHandler} from '@react-native-community/hooks';
 
 function TestApi() {
   const {width, height, scale, fontScale} = useWindowDimensions();
@@ -50,6 +53,29 @@ function TestApi() {
     'color: red;font-size:x-large',
     styles,
   );
+  // const backAndroidHandler = () => {
+  //   console.log(
+  //     '%c--🚀🚀🚀🚀🚀------TestApi.tsx---注释所在行数56----😊===》',
+  //     'color: red;font-size:x-large',
+  //     '拦截返回',
+  //   );
+  //   return true;
+  // };
+  //
+  // useEffect(() => {
+  //   BackHandler.addEventListener('hardwareBackPress', backAndroidHandler);
+  //   return () => {
+  //     BackHandler.removeEventListener('hardwareBackPress', backAndroidHandler);
+  //   };
+  // }, []);
+  useBackHandler(() => {
+    console.log(
+      '%c--🚀🚀🚀🚀🚀------TestApi.tsx---注释所在行数56----😊===》',
+      'color: red;font-size:x-large',
+      '拦截返回',
+    );
+    return true;
+  });
 
   return (
     <StyledSafeAreaView>
@@ -89,7 +115,8 @@ function TestApi() {
             // Linking.openURL('sms:10086');
             // Linking.openURL('mailto:support@expo.io');
             // Linking.sendIntent('com.android.camera', {});
-            void Linking.openSettings();
+            // void Linking.openSettings();
+            // BackHandler.exitApp();
           }}
         />
       </StyledView>
