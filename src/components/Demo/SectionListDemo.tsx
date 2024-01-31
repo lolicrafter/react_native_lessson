@@ -2,10 +2,12 @@ import {RefreshControl, SafeAreaView, SectionList} from 'react-native';
 import {StyledText, StyledView} from '../NativeWindComponent';
 import {SectionData} from '../../constants/Data';
 import {useRef, useState} from 'react';
+import {Icon} from '@rneui/themed';
 
 const RenderItem = ({item}: {item: string}) => {
   return <StyledText className={'text-xl font-bold'}>{item}</StyledText>;
 };
+
 const SectionHeader = ({section}: {section: any}) => {
   return (
     <StyledText className={'text-xl font-bold bg-lime-300'}>
@@ -26,12 +28,22 @@ const EmptyComponent = () => {
   );
 };
 
-function SectionListDemo() {
+function SectionListDemo(props: {closeModal: () => void}) {
   const sectionRef = useRef<SectionList<any> | null>(null);
   const [refreshing, setRefreshing] = useState(false);
   return (
     <SafeAreaView style={{height: '100%'}}>
-      <StyledText className={'text-2xl'}>SectionList</StyledText>
+      <StyledView className={'flex-row items-center'}>
+        <Icon
+          name={'arrowleft'}
+          size={30}
+          type={'antdesign'}
+          onPress={() => {
+            props.closeModal();
+          }}
+        />
+        <StyledText className={'text-2xl'}>SectionList</StyledText>
+      </StyledView>
       <SectionList
         ref={sectionRef}
         style={{height: '100%'}}

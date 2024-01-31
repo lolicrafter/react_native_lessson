@@ -39,7 +39,8 @@ type SectionProps = PropsWithChildren<{
 // import PressableDemo from './src/components/Demo/PressableDemo';
 // import ScrollViewDemo from './src/components/Demo/ScrollViewDemo';
 // import FlatListDemo from './src/components/Demo/FlatListDemo';
-import SectionListDemo from './src/components/Demo/SectionListDemo';
+// import SectionListDemo from './src/components/Demo/SectionListDemo';
+import ModalDemo from './src/components/Demo/ModalDemo';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function Section({children, title}: SectionProps): React.JSX.Element {
@@ -87,8 +88,9 @@ function App(): React.JSX.Element {
         backgroundColor={backgroundStyle.backgroundColor}
       />
       {/*<FlatListDemo />*/}
-      <SectionListDemo />
+      {/*<SectionListDemo />*/}
       {/*<ScrollViewDemo />*/}
+      <ModalDemo />
 
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
