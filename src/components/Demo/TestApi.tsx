@@ -5,11 +5,14 @@ import {
 } from '../NativeWindComponent';
 import {
   Alert,
+  // PermissionsAndroid,
   // BackHandler,
   // Linking,
   Platform,
   StyleSheet,
+  ToastAndroid,
   useWindowDimensions,
+  Vibration,
 } from 'react-native';
 import {Button} from '@rneui/themed';
 // import {useEffect} from 'react';
@@ -93,7 +96,10 @@ function TestApi() {
               },
               {
                 text: '确定',
-                onPress: () => console.error('OK Pressed'),
+                onPress: () => {
+                  console.error('OK Pressed');
+                  Vibration.cancel();
+                },
               },
             ]);
           }}
@@ -102,11 +108,14 @@ function TestApi() {
           title={'测试日志'}
           containerStyle={{marginTop: 20, width: 100}}
           onPress={() => {
-            console.log(
-              '%c--🚀🚀🚀🚀🚀------TestApi.tsx---注释所在行数73----😊===》',
-              'color: red;font-size:x-large',
-              '测试日志',
-            );
+            ToastAndroid.show('测试日志', ToastAndroid.LONG);
+            // ToastAndroid.showWithGravity('测试日志', ToastAndroid.LONG, 1);
+            // Vibration.vibrate([0, 500, 500, 300], true);
+            // console.log(
+            //   '%c--🚀🚀🚀🚀🚀------TestApi.tsx---注释所在行数73----😊===》',
+            //   'color: red;font-size:x-large',
+            //   '测试日志',
+            // );
             // if (Linking.canOpenURL('https://www.baidu.com')) {
             //   Linking.openURL('https://www.baidu.com');
             // }
@@ -117,6 +126,49 @@ function TestApi() {
             // Linking.sendIntent('com.android.camera', {});
             // void Linking.openSettings();
             // BackHandler.exitApp();
+            // PermissionsAndroid.check('android.permission.CAMERA').then(res => {
+            //   console.log(
+            //     '%c--🚀🚀🚀🚀🚀------TestApi.tsx---注释所在行数73----😊===》',
+            //     'color: red;font-size:x-large',
+            //     res,
+            //   );
+            //   if (res) {
+            //     console.log(
+            //       '%c--🚀🚀🚀🚀🚀------TestApi.tsx---注释所在行数73----😊===》',
+            //       'color: red;font-size:x-large',
+            //       '有权限',
+            //     );
+            //   } else {
+            //     console.log(
+            //       '%c--🚀🚀🚀🚀🚀------TestApi.tsx---注释所在行数73----😊===》',
+            //       'color: red;font-size:x-large',
+            //       '没有权限',
+            //     );
+            //     PermissionsAndroid.requestMultiple([
+            //       'android.permission.WRITE_EXTERNAL_STORAGE',
+            //       'android.permission.CAMERA',
+            //     ]).then(res => {
+            //       console.log(
+            //         '%c--🚀🚀🚀🚀🚀------TestApi.tsx---注释所在行数73----😊===》',
+            //         'color: red;font-size:x-large',
+            //         res,
+            //       );
+            //       if (res === 'granted') {
+            //         console.log(
+            //           '%c--🚀🚀🚀🚀🚀------TestApi.tsx---注释所在行数73----😊===》',
+            //           'color: red;font-size:x-large',
+            //           '有权限',
+            //         );
+            //       } else {
+            //         console.log(
+            //           '%c--🚀🚀🚀🚀🚀------TestApi.tsx---注释所在行数73----😊===》',
+            //           'color: red;font-size:x-large',
+            //           '没有权限',
+            //         );
+            //       }
+            //     });
+            //   }
+            // });
           }}
         />
       </StyledView>
