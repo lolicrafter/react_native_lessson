@@ -84,6 +84,26 @@ function TestApi() {
     <StyledSafeAreaView>
       <StyledView>
         <StyledText className={'text-2xl'}>Hello World</StyledText>
+        <StyledView
+          className={'bg-red-500 w-[150] h-[100] z-10'}
+          style={{
+            transform: [
+              {translateX: 100},
+              {translateY: 100},
+              {scale: 1.5},
+              {rotate: '45deg'},
+              // {rotateX: '45deg'},
+              // {rotateY: '45deg'},
+              // {rotateZ: '45deg'},
+              // {scaleX: 2},
+              // {scaleY: 2},
+              // {skewX: '45deg'},
+              // {skewY: '45deg'},
+            ],
+          }}>
+          <StyledText className={'text-2xl'}>Transform</StyledText>
+        </StyledView>
+
         <Button
           containerStyle={{marginTop: 20, width: 100}}
           title={'Click Me'}
