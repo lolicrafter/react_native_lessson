@@ -1,10 +1,12 @@
 import {
   StyledSafeAreaView,
   StyledText,
+  StyledTextInput,
   StyledView,
 } from '../NativeWindComponent';
 import {
   Alert,
+  Keyboard,
   // PermissionsAndroid,
   // BackHandler,
   // Linking,
@@ -16,7 +18,14 @@ import {
 } from 'react-native';
 import {Button} from '@rneui/themed';
 // import {useEffect} from 'react';
-import {useBackHandler} from '@react-native-community/hooks';
+import {useBackHandler, useKeyboard} from '@react-native-community/hooks';
+
+const KeyboardComponent = () => {
+  const keyboard = useKeyboard();
+  console.debug('keyboard isKeyboardShow: ', keyboard.keyboardShown);
+  // console.log('keyboard keyboardHeight: ', keyboard.keyboardHeight);
+  return <StyledTextInput value={'Hello World'} className={'border-2'} />;
+};
 
 function TestApi() {
   const {width, height, scale, fontScale} = useWindowDimensions();
@@ -56,21 +65,7 @@ function TestApi() {
     'color: red;font-size:x-large',
     styles,
   );
-  // const backAndroidHandler = () => {
-  //   console.log(
-  //     '%c--🚀🚀🚀🚀🚀------TestApi.tsx---注释所在行数56----😊===》',
-  //     'color: red;font-size:x-large',
-  //     '拦截返回',
-  //   );
-  //   return true;
-  // };
-  //
-  // useEffect(() => {
-  //   BackHandler.addEventListener('hardwareBackPress', backAndroidHandler);
-  //   return () => {
-  //     BackHandler.removeEventListener('hardwareBackPress', backAndroidHandler);
-  //   };
-  // }, []);
+
   useBackHandler(() => {
     console.log(
       '%c--🚀🚀🚀🚀🚀------TestApi.tsx---注释所在行数56----😊===》',
@@ -84,6 +79,7 @@ function TestApi() {
     <StyledSafeAreaView>
       <StyledView>
         <StyledText className={'text-2xl'}>Hello World</StyledText>
+        <KeyboardComponent />
         <StyledView
           className={'bg-red-500 w-[150] h-[100] z-10'}
           style={{
@@ -128,6 +124,7 @@ function TestApi() {
           title={'测试日志'}
           containerStyle={{marginTop: 20, width: 100}}
           onPress={() => {
+            Keyboard.dismiss();
             ToastAndroid.show('测试日志', ToastAndroid.LONG);
             // ToastAndroid.showWithGravity('测试日志', ToastAndroid.LONG, 1);
             // Vibration.vibrate([0, 500, 500, 300], true);
