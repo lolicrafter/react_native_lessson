@@ -38,7 +38,8 @@ type SectionProps = PropsWithChildren<{
 // import ButtonDemo from './src/components/ButtonDemo';
 // import PressableDemo from './src/components/Demo/PressableDemo';
 // import ScrollViewDemo from './src/components/Demo/ScrollViewDemo';
-import FlatListDemo from './src/components/Demo/FlatListDemo';
+// import FlatListDemo from './src/components/Demo/FlatListDemo';
+import SectionListDemo from './src/components/Demo/SectionListDemo';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function Section({children, title}: SectionProps): React.JSX.Element {
@@ -85,7 +86,8 @@ function App(): React.JSX.Element {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-      <FlatListDemo />
+      {/*<FlatListDemo />*/}
+      <SectionListDemo />
       {/*<ScrollViewDemo />*/}
 
       <ScrollView
