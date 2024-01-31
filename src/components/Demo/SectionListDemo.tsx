@@ -1,7 +1,7 @@
-import {SafeAreaView, SectionList} from 'react-native';
+import {RefreshControl, SafeAreaView, SectionList} from 'react-native';
 import {StyledText, StyledView} from '../NativeWindComponent';
 import {SectionData} from '../../constants/Data';
-import {useRef} from 'react';
+import {useRef, useState} from 'react';
 
 const RenderItem = ({item}: {item: string}) => {
   return <StyledText className={'text-xl font-bold'}>{item}</StyledText>;
@@ -28,6 +28,7 @@ const EmptyComponent = () => {
 
 function SectionListDemo() {
   const sectionRef = useRef<SectionList<any> | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
   return (
     <SafeAreaView style={{height: '100%'}}>
       <StyledText className={'text-2xl'}>SectionList</StyledText>
@@ -43,6 +44,26 @@ function SectionListDemo() {
         ItemSeparatorComponent={SeparatorComponent}
         ListEmptyComponent={EmptyComponent}
         stickySectionHeadersEnabled={true}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={() => {
+              console.log('onRefresh');
+              setRefreshing(true);
+              setTimeout(() => {
+                setRefreshing(false);
+              }, 2000);
+            }}
+          />
+        }
+        onEndReached={() => {
+          console.log('onEndReached');
+          setRefreshing(true);
+          setTimeout(() => {
+            setRefreshing(false);
+          }, 2000);
+        }}
+        onEndReachedThreshold={0.1}
         onTouchEnd={() => {
           sectionRef.current?.scrollToLocation({
             sectionIndex: 4,
