@@ -5,7 +5,7 @@ import {
   StyledText,
   StyledView,
 } from '../NativeWindComponent';
-import {Modal} from 'react-native';
+import {Modal, StatusBar} from 'react-native';
 import {useState} from 'react';
 import SectionListDemo from './SectionListDemo';
 
@@ -16,7 +16,16 @@ function ModalDemo() {
   };
   return (
     <StyledSafeAreaView>
-      <StyledButton title={'Show Modal'} onPress={() => setVisible(true)} />
+      <StatusBar
+        barStyle={'light-content'}
+        backgroundColor={'rgba(0, 0, 0, 0.5)'}
+        animated={true}
+        translucent={true}
+        hidden={false}
+      />
+      <StyledView className={'pt-[15px]'}>
+        <StyledButton title={'Show Modal'} onPress={() => setVisible(true)} />
+      </StyledView>
       <StyledText className={'text-2xl'}>Modal</StyledText>
       <StyledView className={'p-[10px]'}>
         <Modal
