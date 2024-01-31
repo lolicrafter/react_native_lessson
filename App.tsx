@@ -24,9 +24,6 @@ import {
   // LearnMoreLinks,
   // ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import FlatListDemo from './src/components/Demo/FlatListDemo';
-// import PressableDemo from './src/components/Demo/PressableDemo';
-// import ScrollViewDemo from './src/components/Demo/ScrollViewDemo';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -39,6 +36,9 @@ type SectionProps = PropsWithChildren<{
 // import TextInputDemo from './src/components/TextInputDemo';
 // import TouchableOpacityDemo from './src/components/TouchableOpacityDemo';
 // import ButtonDemo from './src/components/ButtonDemo';
+// import PressableDemo from './src/components/Demo/PressableDemo';
+// import ScrollViewDemo from './src/components/Demo/ScrollViewDemo';
+import FlatListDemo from './src/components/Demo/FlatListDemo';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function Section({children, title}: SectionProps): React.JSX.Element {
@@ -72,8 +72,6 @@ function App(): React.JSX.Element {
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-    width: '100%',
-    height: '100%',
   };
 
   useEffect(() => {
@@ -87,6 +85,9 @@ function App(): React.JSX.Element {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
+      <FlatListDemo />
+      {/*<ScrollViewDemo />*/}
+
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
@@ -98,8 +99,6 @@ function App(): React.JSX.Element {
         {/*<TouchableOpacityDemo />*/}
         {/*<ButtonDemo />*/}
         {/*<PressableDemo />*/}
-        {/*<ScrollViewDemo />*/}
-        <FlatListDemo />
         {/*<Header />*/}
         {/*<View*/}
         {/*  style={{*/}

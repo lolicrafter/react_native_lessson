@@ -8,44 +8,46 @@ import {
 import {useRef} from 'react';
 import {Button} from '@rneui/base';
 
-function ViewItem(props: any) {
-  function getRandomRgbColor() {
-    const red = Math.floor(Math.random() * 256);
-    const green = Math.floor(Math.random() * 256);
-    const blue = Math.floor(Math.random() * 256);
-    return `rgb(${red}, ${green}, ${blue})`;
-  }
+// function ViewItem(props: any) {
+//   function getRandomRgbColor() {
+//     const red = Math.floor(Math.random() * 256);
+//     const green = Math.floor(Math.random() * 256);
+//     const blue = Math.floor(Math.random() * 256);
+//     return `rgb(${red}, ${green}, ${blue})`;
+//   }
+//
+//   const randomHexColor = getRandomRgbColor();
+//
+//   return (
+//     <StyledView
+//       className={'h-[100px] flex justify-center items-center'}
+//       style={{
+//         backgroundColor: randomHexColor,
+//       }}>
+//       {props.children}
+//     </StyledView>
+//   );
+// }
 
-  const randomHexColor = getRandomRgbColor();
-
-  return (
-    <StyledView
-      className={'h-[100px] flex justify-center items-center'}
-      style={{
-        backgroundColor: randomHexColor,
-      }}>
-      {props.children}
-    </StyledView>
-  );
-}
-
-function BuildView() {
-  const arr = Array.from({length: 22}, (v, k) => k + 1);
-  return (
-    <StyledView className={'w-full'}>
-      {arr.map((item, index) => {
-        return (
-          <ViewItem key={index}>
-            <StyledText className={'text-white text-[20px]'}>{item}</StyledText>
-          </ViewItem>
-        );
-      })}
-    </StyledView>
-  );
-}
+// function BuildView() {
+//   const arr = Array.from({length: 22}, (v, k) => k + 1);
+//   return (
+//     <StyledView className={'w-full'}>
+//       {arr.map((item, index) => {
+//         return (
+//           <ViewItem key={index}>
+//             <StyledText className={'text-white text-[20px]'}>{item}</StyledText>
+//           </ViewItem>
+//         );
+//       })}
+//     </StyledView>
+//   );
+// }
 
 function ScrollViewDemo() {
   const ref = useRef(null);
+  const arr = Array.from({length: 22}, (v, k) => k + 1);
+
   return (
     <SafeAreaView>
       <StyledScrollView
@@ -61,7 +63,7 @@ function ScrollViewDemo() {
         // horizontal={true}
         // pagingEnabled={true}
 
-        stickyHeaderIndices={[1]}
+        stickyHeaderIndices={[2]}
         contentContainerStyle={{
           backgroundColor: 'skyblue',
           display: 'flex',
@@ -82,17 +84,17 @@ function ScrollViewDemo() {
           }}>
           Button
         </Button>
-        {BuildView()}
+        {/*{BuildView()}*/}
 
-        {/*{arr.map((item, index) => {*/}
-        {/*  return (*/}
-        {/*    <StyledView key={index} className={'w-[400px] h-[300]'}>*/}
-        {/*      <StyledText className={'text-white text-[20px]'}>*/}
-        {/*        {item}*/}
-        {/*      </StyledText>*/}
-        {/*    </StyledView>*/}
-        {/*  );*/}
-        {/*})}*/}
+        {arr.map((item, index) => {
+          return (
+            <StyledView key={index} className={'w-[400px] h-[300]'}>
+              <StyledText className={'text-white text-[20px]'}>
+                {item}
+              </StyledText>
+            </StyledView>
+          );
+        })}
       </StyledScrollView>
     </SafeAreaView>
   );
