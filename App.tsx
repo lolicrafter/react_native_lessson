@@ -43,7 +43,8 @@ type SectionProps = PropsWithChildren<{
 // import ModalDemo from './src/components/Demo/ModalDemo';
 // import SwitchDemo from './src/components/Demo/SwitchDemo';
 // import TestApi from './src/components/Demo/TestApi';
-import AnimeDemo from './src/components/Demo/AnimeDemo';
+// import AnimeDemo from './src/components/Demo/AnimeDemo';
+import AnimeModalDemo from './src/components/Demo/AnimeModalDemo';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function Section({children, title}: SectionProps): React.JSX.Element {
@@ -96,7 +97,8 @@ function App(): React.JSX.Element {
       {/*<ModalDemo />*/}
       {/*<SwitchDemo />*/}
       {/*<TestApi />*/}
-      <AnimeDemo />
+      {/*<AnimeDemo />*/}
+      <AnimeModalDemo />
 
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"

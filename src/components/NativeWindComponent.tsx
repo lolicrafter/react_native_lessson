@@ -44,9 +44,7 @@ type TextProps = ComponentProps<typeof Text>;
 type TextInputProps = ComponentProps<typeof TextInput>;
 
 function processStyle(style: StyleProp<RNTextStyle>) {
-  // const styleArray = Array.isArray(style) ? style : [style];
   let weightedFontFamily: StyleProp<RNTextStyle> | undefined;
-
   if (style) {
     const {fontWeight, ...rest} = StyleSheet.flatten(style);
     if (fontWeight) {
