@@ -12,6 +12,7 @@ import {
   PressableProps,
   ScrollView,
   SafeAreaView,
+  KeyboardAvoidingView,
 } from 'react-native';
 import {styled, StyledProps} from 'nativewind';
 
@@ -88,6 +89,7 @@ function processStyle(style: StyleProp<RNTextStyle>) {
 
 export const StyledScrollView = styled(ScrollView);
 export const StyledView = styled(View);
+export const StyledKeyboardAvoidingView = styled(KeyboardAvoidingView);
 export const StyledImage = styled(Image);
 export const StyledSafeAreaView = styled(SafeAreaView, 'h-full');
 export const StyledImageBackground = styled(ImageBackground);

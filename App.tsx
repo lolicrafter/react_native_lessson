@@ -8,8 +8,9 @@
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
+  Platform,
+  // SafeAreaView,
+  // ScrollView,
   StatusBar,
   StyleSheet,
   Text,
@@ -24,6 +25,10 @@ import {
   // LearnMoreLinks,
   // ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import Home from './src/modules/Home';
+import {StyledSafeAreaView} from './src/components/NativeWindComponent';
+import {useProxy} from 'valtio/utils';
+import {osStore} from './src/stores';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -44,7 +49,7 @@ type SectionProps = PropsWithChildren<{
 // import SwitchDemo from './src/components/Demo/SwitchDemo';
 // import TestApi from './src/components/Demo/TestApi';
 // import AnimeDemo from './src/components/Demo/AnimeDemo';
-import AnimeModalDemo from './src/components/Demo/AnimeModalDemo';
+// import AnimeModalDemo from './src/components/Demo/AnimeModalDemo';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function Section({children, title}: SectionProps): React.JSX.Element {
@@ -80,17 +85,21 @@ function App(): React.JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  const {setOs} = useProxy(osStore);
+  Platform.OS === 'ios' ? setOs('ios') : setOs('android');
+
   // useEffect(() => {
   //   const bool = Math.random() > 0.5;
   //   console.log('bool', bool);
   // }, []);
 
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <StyledSafeAreaView style={backgroundStyle}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
+      <Home />
       {/*<FlatListDemo />*/}
       {/*<SectionListDemo />*/}
       {/*<ScrollViewDemo />*/}
@@ -98,41 +107,41 @@ function App(): React.JSX.Element {
       {/*<SwitchDemo />*/}
       {/*<TestApi />*/}
       {/*<AnimeDemo />*/}
-      <AnimeModalDemo />
+      {/*<AnimeModalDemo />*/}
 
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        {/*<ViewDemo />*/}
-        {/*<TextDemo />*/}
-        {/*<ImageDemo />*/}
-        {/*<ImageBackgroundDemo />*/}
-        {/*<TextInputDemo />*/}
-        {/*<TouchableOpacityDemo />*/}
-        {/*<ButtonDemo />*/}
-        {/*<PressableDemo />*/}
-        {/*<Header />*/}
-        {/*<View*/}
-        {/*  style={{*/}
-        {/*    backgroundColor: isDarkMode ? Colors.black : Colors.white,*/}
-        {/*  }}>*/}
-        {/*  <Section title="Step One">*/}
-        {/*    Edit <Text style={styles.highlight}>App.tsx</Text> to change this*/}
-        {/*    screen and then come back to see your edits.*/}
-        {/*  </Section>*/}
-        {/*  <Section title="See Your Changes">*/}
-        {/*    <ReloadInstructions />*/}
-        {/*  </Section>*/}
-        {/*  <Section title="Debug">*/}
-        {/*    <DebugInstructions />*/}
-        {/*  </Section>*/}
-        {/*  <Section title="Learn More">*/}
-        {/*    Read the docs to discover what to do next:*/}
-        {/*  </Section>*/}
-        {/*  <LearnMoreLinks />*/}
-        {/*</View>*/}
-      </ScrollView>
-    </SafeAreaView>
+      {/*<ScrollView*/}
+      {/*  contentInsetAdjustmentBehavior="automatic"*/}
+      {/*  style={backgroundStyle}>*/}
+      {/*<ViewDemo />*/}
+      {/*<TextDemo />*/}
+      {/*<ImageDemo />*/}
+      {/*<ImageBackgroundDemo />*/}
+      {/*<TextInputDemo />*/}
+      {/*<TouchableOpacityDemo />*/}
+      {/*<ButtonDemo />*/}
+      {/*<PressableDemo />*/}
+      {/*<Header />*/}
+      {/*<View*/}
+      {/*  style={{*/}
+      {/*    backgroundColor: isDarkMode ? Colors.black : Colors.white,*/}
+      {/*  }}>*/}
+      {/*  <Section title="Step One">*/}
+      {/*    Edit <Text style={styles.highlight}>App.tsx</Text> to change this*/}
+      {/*    screen and then come back to see your edits.*/}
+      {/*  </Section>*/}
+      {/*  <Section title="See Your Changes">*/}
+      {/*    <ReloadInstructions />*/}
+      {/*  </Section>*/}
+      {/*  <Section title="Debug">*/}
+      {/*    <DebugInstructions />*/}
+      {/*  </Section>*/}
+      {/*  <Section title="Learn More">*/}
+      {/*    Read the docs to discover what to do next:*/}
+      {/*  </Section>*/}
+      {/*  <LearnMoreLinks />*/}
+      {/*</View>*/}
+      {/*</ScrollView>*/}
+    </StyledSafeAreaView>
   );
 }
 
