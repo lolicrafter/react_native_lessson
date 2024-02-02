@@ -1,7 +1,8 @@
 import {proxy} from 'valtio';
-import {resetStore} from '@/utils';
+// import {resetStore} from '@/utils';
 import {nanoid} from 'nanoid';
 import {storage} from '@/utils/asyncStorage';
+import _ from 'lodash';
 
 interface state {
   type: string;
@@ -12,12 +13,14 @@ interface state {
 
 interface IAddAccountStore extends state {
   accounts: state[];
-  initial: () => void;
+  StringifyAccounts: string;
+  initialAccounts: () => void;
   setType: (type: string) => void;
   setName: (name: string) => void;
   setAccount: (account: string) => void;
   setPassword: (password: string) => void;
   submit: () => void;
+  reset: () => void;
 }
 
 const initialState: state = {
@@ -29,7 +32,10 @@ const initialState: state = {
 export const UseAddAccountStore = proxy<IAddAccountStore>({
   ...initialState,
   accounts: [],
-  initial: async () => {
+  get StringifyAccounts() {
+    return JSON.stringify(this.accounts);
+  },
+  initialAccounts: async () => {
     UseAddAccountStore.accounts = (await storage.getItem('accounts')) || [];
   },
   setType: (type: string) => {
@@ -44,11 +50,19 @@ export const UseAddAccountStore = proxy<IAddAccountStore>({
   setPassword: (password: string) => {
     UseAddAccountStore.password = password;
   },
+  reset: () => {
+    const deepCopyInitialState = _.cloneDeep(initialState);
+    for (let key in deepCopyInitialState) {
+      if (UseAddAccountStore.hasOwnProperty(key)) {
+        UseAddAccountStore[key] = deepCopyInitialState[key];
+      }
+    }
+  },
   submit: async () => {
     const accounts = (await storage.getItem('accounts')) || [];
     const {id = nanoid(), type, name, account, password} = UseAddAccountStore;
     const newAccount = {id, type, name, account, password};
     await storage.setItem('accounts', [...accounts, newAccount]);
-    resetStore(UseAddAccountStore, initialState);
+    UseAddAccountStore.reset();
   },
 });

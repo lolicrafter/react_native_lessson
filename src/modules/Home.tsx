@@ -2,10 +2,12 @@ import {
   StyledText,
   StyledTouchableOpacity,
   StyledView,
-} from '../components/NativeWindComponent';
+} from '@/components/NativeWindComponent';
 import {Icon} from '@rneui/themed';
-import AddAccount from '../components/AddAccount';
-import {MutableRefObject, useRef} from 'react';
+import AddAccount from '@/components/AddAccount';
+import {MutableRefObject, useEffect, useRef} from 'react';
+import {UseAddAccountStore} from '@/stores';
+import {useProxy} from 'valtio/utils';
 
 interface IAddAccount {
   open(): void;
@@ -30,10 +32,30 @@ function Title() {
 
 function Home() {
   const addAccountRef = useRef<IAddAccount>();
+  const {type, accounts, StringifyAccounts, initialAccounts} =
+    useProxy(UseAddAccountStore);
+
+  useEffect(() => {
+    initialAccounts();
+    console.log(
+      '%c--🚀🚀🚀🚀🚀------Home.tsx---注释所在行数40----😊===》',
+      'color: red;font-size:x-large',
+      accounts,
+    );
+  }, [StringifyAccounts]);
+
+  // console.log(
+  //   '%c--🚀🚀🚀🚀🚀------Home.tsx---注释所在行数47----accounts😊===》',
+  //   'color: red;font-size:x-large',
+  //   accounts,
+  // );
 
   return (
     <StyledView className={'w-full h-full bg-lime-300'}>
-      {Title()}
+      <Title />
+      <StyledText className={'text-[24px] font-bold bg-blue-300'}>
+        {type}
+      </StyledText>
       <StyledTouchableOpacity
         activeOpacity={0.6}
         onPress={() => {

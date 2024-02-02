@@ -201,4 +201,4 @@ function RenderType() {
   );
 }
 
-export default AddAccount;
+export default React.memo(AddAccount);
