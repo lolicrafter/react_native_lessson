@@ -1,4 +1,4 @@
-import React, {useImperativeHandle} from 'react';
+import React, {useImperativeHandle, useMemo} from 'react';
 import {
   StyledKeyboardAvoidingView,
   StyledText,
@@ -7,10 +7,10 @@ import {
   StyledView,
 } from './NativeWindComponent';
 import {Modal} from 'react-native';
-import {IAddAccountProps} from '../modules/Home';
+import {IAddAccountProps} from '@/modules/Home';
 import {Icon} from '@rneui/themed';
-import {osStore} from '../stores';
 import {useProxy} from 'valtio/utils';
+import {osStore, UseAddAccountStore} from '@/stores';
 
 function AddAccount(props: IAddAccountProps) {
   const {os} = useProxy(osStore);
@@ -19,6 +19,7 @@ function AddAccount(props: IAddAccountProps) {
     'color: red;font-size:x-large',
     os,
   );
+
   const behavior = os === 'ios' ? 'height' : 'padding';
 
   useImperativeHandle(props.mRef, () => ({
@@ -30,13 +31,7 @@ function AddAccount(props: IAddAccountProps) {
     },
   }));
   const [visible, setVisible] = React.useState(false);
-  const [type, setType] = React.useState('游戏');
-  const [name, setName] = React.useState('');
-  const [account, setAccount] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const submit = () => {
-    console.log('点击了submit');
-  };
+
   return (
     <Modal
       visible={visible}
@@ -53,40 +48,40 @@ function AddAccount(props: IAddAccountProps) {
           'w-full h-full flex justify-center items-center bg-[#00000060]'
         }>
         <StyledView className={'w-4/5 p-[16]  bg-white rounded'}>
-          {renderTitle({setVisible})}
-          {renderType({type, setType})}
-          {renderName({name, setName})}
-          {renderAccount({account, setAccount})}
-          {renderPassword({password, setPassword})}
-          {renderSubmit({submit})}
+          <RenderTitle setVisible={setVisible} />
+          <RenderType />
+          <RenderName />
+          <RenderAccount />
+          <RenderPassword />
+          <RenderSubmit />
         </StyledView>
       </StyledKeyboardAvoidingView>
     </Modal>
   );
 }
 
-function renderSubmit({submit}: {submit: () => void}) {
-  return (
-    <StyledTouchableOpacity
-      activeOpacity={0.6}
-      onPress={() => {
-        submit();
-      }}
-      className={
-        'mt-[20] mb-[10]  rounded-lg bg-blue-500 h-[44]  flex justify-center items-center'
-      }>
-      <StyledText className={'text-white text-[20px]'}>提交</StyledText>
-    </StyledTouchableOpacity>
-  );
+function RenderSubmit() {
+  const {submit} = useProxy(UseAddAccountStore);
+
+  const ButtonComponent = useMemo(() => {
+    return (
+      <StyledTouchableOpacity
+        activeOpacity={0.6}
+        onPress={() => {
+          submit();
+        }}
+        className={
+          'mt-[20] mb-[10]  rounded-lg bg-blue-500 h-[44]  flex justify-center items-center'
+        }>
+        <StyledText className={'text-white text-[20px]'}>提交</StyledText>
+      </StyledTouchableOpacity>
+    );
+  }, [submit]);
+  return <>{ButtonComponent}</>;
 }
 
-function renderPassword({
-  password,
-  setPassword,
-}: {
-  password: string;
-  setPassword: (password: string) => void;
-}) {
+function RenderPassword() {
+  const {password, setPassword} = useProxy(UseAddAccountStore);
   return (
     <StyledView className={'mt-[10]'}>
       <StyledText>密码</StyledText>
@@ -108,13 +103,8 @@ function renderPassword({
   );
 }
 
-function renderAccount({
-  account,
-  setAccount,
-}: {
-  account: string;
-  setAccount: (account: string) => void;
-}) {
+function RenderAccount() {
+  const {account, setAccount} = useProxy(UseAddAccountStore);
   return (
     <StyledView className={'mt-[10]'}>
       <StyledText>账号</StyledText>
@@ -136,13 +126,8 @@ function renderAccount({
   );
 }
 
-function renderName({
-  name,
-  setName,
-}: {
-  name: string;
-  setName: (name: string) => void;
-}) {
+function RenderName() {
+  const {name, setName} = useProxy(UseAddAccountStore);
   return (
     <StyledView className={'mt-[10]'}>
       <StyledText>账号名称</StyledText>
@@ -164,7 +149,7 @@ function renderName({
   );
 }
 
-function renderTitle({setVisible}: {setVisible: (visible: boolean) => void}) {
+function RenderTitle({setVisible}: {setVisible: (visible: boolean) => void}) {
   return (
     <StyledView className={'flex justify-center items-center'}>
       <StyledText className={'text-xl'}>账号管理</StyledText>
@@ -183,8 +168,9 @@ function renderTitle({setVisible}: {setVisible: (visible: boolean) => void}) {
   );
 }
 
-function renderType({type, setType}: any) {
+function RenderType() {
   const typeList = ['游戏', '平台', '银行', '其他'];
+  const {type, setType} = useProxy(UseAddAccountStore);
   return (
     <StyledView className={'mt-[20]'}>
       <StyledText>账号类型</StyledText>
