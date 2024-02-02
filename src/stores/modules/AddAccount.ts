@@ -1,15 +1,37 @@
 import {proxy} from 'valtio';
 import {resetStore} from '@/utils';
+import {nanoid} from 'nanoid';
+import {storage} from '@/utils/asyncStorage';
 
-const initialState = {
+interface state {
+  type: string;
+  name: string;
+  account: string;
+  password: string;
+}
+
+interface IAddAccountStore extends state {
+  accounts: state[];
+  initial: () => void;
+  setType: (type: string) => void;
+  setName: (name: string) => void;
+  setAccount: (account: string) => void;
+  setPassword: (password: string) => void;
+  submit: () => void;
+}
+
+const initialState: state = {
   type: '游戏',
   name: '',
   account: '',
   password: '',
 };
-
-export const UseAddAccountStore = proxy({
+export const UseAddAccountStore = proxy<IAddAccountStore>({
   ...initialState,
+  accounts: [],
+  initial: async () => {
+    UseAddAccountStore.accounts = (await storage.getItem('accounts')) || [];
+  },
   setType: (type: string) => {
     UseAddAccountStore.type = type;
   },
@@ -22,9 +44,11 @@ export const UseAddAccountStore = proxy({
   setPassword: (password: string) => {
     UseAddAccountStore.password = password;
   },
-  submit: () => {
-    const {type, name, account, password} = UseAddAccountStore;
-    console.log('submit', type, name, account, password);
+  submit: async () => {
+    const accounts = (await storage.getItem('accounts')) || [];
+    const {id = nanoid(), type, name, account, password} = UseAddAccountStore;
+    const newAccount = {id, type, name, account, password};
+    await storage.setItem('accounts', [...accounts, newAccount]);
     resetStore(UseAddAccountStore, initialState);
   },
 });

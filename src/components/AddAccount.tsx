@@ -73,7 +73,7 @@ function RenderSubmit() {
         className={
           'mt-[20] mb-[10]  rounded-lg bg-blue-500 h-[44]  flex justify-center items-center'
         }>
-        <StyledText className={'text-white text-[20px]'}>提交</StyledText>
+        <StyledText className={'text-white text-[20px]'}>保 存</StyledText>
       </StyledTouchableOpacity>
     );
   }, [submit]);
