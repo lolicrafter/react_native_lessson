@@ -11,6 +11,7 @@ export interface IAccountItem {
   account: string;
   password: string;
   id?: string;
+  showPassword?: boolean;
 }
 
 interface IAddAccountStore extends IAccountItem {
@@ -34,6 +35,7 @@ const initialState: IAccountItem = {
   account: '',
   password: '',
   activeType: '游戏',
+  showPassword: false,
 };
 export const UseAddAccountStore = proxy<IAddAccountStore>({
   ...initialState,

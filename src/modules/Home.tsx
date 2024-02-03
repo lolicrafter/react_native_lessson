@@ -3,7 +3,7 @@ import {
   StyledTouchableOpacity,
   StyledView,
 } from '@/components/NativeWindComponent';
-import {Icon} from '@rneui/themed';
+import {Icon, Switch} from '@rneui/themed';
 import AddAccount from '@/components/AddAccount';
 import {
   createContext,
@@ -39,12 +39,22 @@ export interface IAddAccountProps {
 }
 
 function Title() {
+  const {showPassword} = useProxy(UseAddAccountStore);
+
   return (
     <StyledView
       className={'flex justify-center items-center bg-rose-500 py-[10]'}>
       <StyledText className={'text-[24px] font-bold bg-blue-300'}>
         账号管理
       </StyledText>
+      <StyledView className={'absolute right-[20]'}>
+        <Switch
+          thumbColor={showPassword ? '#0ea5ee' : '#f4f3f4'}
+          trackColor={{false: '#767577', true: '#0ea5ee'}}
+          value={showPassword}
+          onValueChange={v => (UseAddAccountStore.showPassword = v)}
+        />
+      </StyledView>
     </StyledView>
   );
 }
@@ -52,7 +62,7 @@ function Title() {
 const RenderItem = ({item}: {item: IAccountItem}) => {
   const {addAccountRef, removeModalRef} = useContext(AddAccountRefContext);
 
-  const {activeType} = useProxy(UseAddAccountStore);
+  const {activeType, showPassword} = useProxy(UseAddAccountStore);
   if (item.type !== activeType) {
     return null;
   }
@@ -75,9 +85,6 @@ const RenderItem = ({item}: {item: IAccountItem}) => {
           title: '删除账号?',
           content: `是否确定删除账号：${item.account}`,
           onConfirm,
-          onCancel: () => {
-            removeModalRef?.current?.close();
-          },
         } as DeleteModalProps);
       }}
       className={'  bg-white p-[10] border-t border-box border-slate-300'}>
@@ -87,7 +94,7 @@ const RenderItem = ({item}: {item: IAccountItem}) => {
           账号： {item.account}
         </StyledText>
         <StyledText className={'text-[16px] flex-1 text-stone-500'}>
-          密码： {item.password}
+          密码： {showPassword ? item.password : '******'}
         </StyledText>
       </StyledView>
     </StyledTouchableOpacity>
@@ -193,6 +200,7 @@ function SectionListCom() {
   /**
    * 根据accounts中的type字段，建立分组数据，格式为[{type: string, data: IAccountItem}]
    */
+  LayoutAnimation.easeInEaseOut();
   const sectionListData = useMemo(() => {
     return accounts.reduce((prev, cur) => {
       const index = prev.findIndex(item => item.type === cur.type);

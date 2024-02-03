@@ -6,7 +6,6 @@ export interface DeleteModalProps {
   title: string;
   content: string;
   onConfirm: () => void;
-  onCancel: () => void;
 }
 
 interface IOpenDeleteModalProps {
@@ -21,14 +20,16 @@ export interface IOpenDeleteModalRefProps {
 
 const DeleteModal = IOpenDeleteModalRefProps => {
   const [isVisible, setVisible] = React.useState(false);
+  const onCancel = () => {
+    setVisible(false);
+  };
   const [deleteModalProps, setDeleteModalProps] =
     React.useState<DeleteModalProps>({
       title: '',
       content: '',
       onConfirm: () => {},
-      onCancel: () => {},
     });
-  const {title, content, onConfirm, onCancel} = deleteModalProps;
+  const {title, content, onConfirm} = deleteModalProps;
   useImperativeHandle(IOpenDeleteModalRefProps.mRef, () => ({
     open: (data?: DeleteModalProps) => {
       setVisible(true);
