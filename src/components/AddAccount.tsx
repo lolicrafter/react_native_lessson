@@ -10,7 +10,7 @@ import {Modal} from 'react-native';
 import {IAddAccountProps} from '@/modules/Home';
 import {Icon} from '@rneui/themed';
 import {useProxy} from 'valtio/utils';
-import {osStore, UseAddAccountStore} from '@/stores';
+import {IAccountItem, osStore, UseAddAccountStore} from '@/stores';
 
 function AddAccount(props: IAddAccountProps) {
   const {os} = useProxy(osStore);
@@ -23,14 +23,24 @@ function AddAccount(props: IAddAccountProps) {
   const behavior = os === 'ios' ? 'height' : 'padding';
 
   useImperativeHandle(props.mRef, () => ({
-    open: () => {
+    open: (data?: IAccountItem) => {
       setVisible(true);
+      if (data) {
+        UseAddAccountStore.setAccountItem(data);
+      }
     },
     close: () => {
       setVisible(false);
     },
   }));
   const [visible, setVisible] = React.useState(false);
+
+  const onClose = (reset: boolean) => {
+    setVisible(false);
+    if (reset) {
+      UseAddAccountStore.reset();
+    }
+  };
 
   return (
     <Modal
@@ -39,7 +49,7 @@ function AddAccount(props: IAddAccountProps) {
       statusBarTranslucent={true}
       animationType={'fade'}
       onRequestClose={() => {
-        setVisible(false);
+        onClose(true);
       }}>
       <StyledKeyboardAvoidingView
         // behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -48,19 +58,19 @@ function AddAccount(props: IAddAccountProps) {
           'w-full h-full flex justify-center items-center bg-[#00000060]'
         }>
         <StyledView className={'w-4/5 p-[16]  bg-white rounded'}>
-          <RenderTitle setVisible={setVisible} />
+          <RenderTitle onClose={onClose} />
           <RenderType />
           <RenderName />
           <RenderAccount />
           <RenderPassword />
-          <RenderSubmit />
+          <RenderSubmit onClose={onClose} />
         </StyledView>
       </StyledKeyboardAvoidingView>
     </Modal>
   );
 }
 
-function RenderSubmit() {
+function RenderSubmit({onClose}: {onClose: (reset: boolean) => void}) {
   const {submit} = useProxy(UseAddAccountStore);
 
   const ButtonComponent = useMemo(() => {
@@ -69,6 +79,7 @@ function RenderSubmit() {
         activeOpacity={0.6}
         onPress={() => {
           submit();
+          onClose(false);
         }}
         className={
           'mt-[20] mb-[10]  rounded-lg bg-blue-500 h-[44]  flex justify-center items-center'
@@ -76,7 +87,7 @@ function RenderSubmit() {
         <StyledText className={'text-white text-[20px]'}>保 存</StyledText>
       </StyledTouchableOpacity>
     );
-  }, [submit]);
+  }, [onClose, submit]);
   return <>{ButtonComponent}</>;
 }
 
@@ -149,10 +160,13 @@ function RenderName() {
   );
 }
 
-function RenderTitle({setVisible}: {setVisible: (visible: boolean) => void}) {
+function RenderTitle({onClose}: {onClose: (visible: boolean) => void}) {
+  const {id} = useProxy(UseAddAccountStore);
   return (
     <StyledView className={'flex justify-center items-center'}>
-      <StyledText className={'text-xl'}>账号管理</StyledText>
+      <StyledText className={'text-xl'}>
+        {id ? '编辑账号' : '新增账号'}
+      </StyledText>
       <StyledView className={'absolute right-[10] '}>
         <Icon
           type={'antdesign'}
@@ -160,7 +174,7 @@ function RenderTitle({setVisible}: {setVisible: (visible: boolean) => void}) {
           size={30}
           color={'#7398a6'}
           onPress={() => {
-            setVisible(false);
+            onClose(true);
           }}
         />
       </StyledView>

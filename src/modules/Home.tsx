@@ -5,12 +5,31 @@ import {
 } from '@/components/NativeWindComponent';
 import {Icon} from '@rneui/themed';
 import AddAccount from '@/components/AddAccount';
-import {MutableRefObject, useEffect, useRef} from 'react';
-import {UseAddAccountStore} from '@/stores';
+import {
+  createContext,
+  memo,
+  MutableRefObject,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
+import {IAccountItem, UseAddAccountStore} from '@/stores';
 import {useProxy} from 'valtio/utils';
+import {
+  LayoutAnimation,
+  SectionList,
+  SectionListData,
+  StyleSheet,
+} from 'react-native';
+import DeleteModal, {
+  DeleteModalProps,
+  IOpenDeleteModalRefProps,
+} from '@/components/DeleteModal';
 
 interface IAddAccount {
-  open(): void;
+  open(data?: IAccountItem): void;
 
   close(): void;
 }
@@ -30,48 +49,210 @@ function Title() {
   );
 }
 
-function Home() {
-  const addAccountRef = useRef<IAddAccount>();
-  const {type, accounts, StringifyAccounts, initialAccounts} =
-    useProxy(UseAddAccountStore);
+const RenderItem = ({item}: {item: IAccountItem}) => {
+  const {addAccountRef, removeModalRef} = useContext(AddAccountRefContext);
 
-  useEffect(() => {
-    initialAccounts();
-    console.log(
-      '%c--🚀🚀🚀🚀🚀------Home.tsx---注释所在行数40----😊===》',
-      'color: red;font-size:x-large',
-      accounts,
-    );
-  }, [StringifyAccounts]);
-
-  // console.log(
-  //   '%c--🚀🚀🚀🚀🚀------Home.tsx---注释所在行数47----accounts😊===》',
-  //   'color: red;font-size:x-large',
-  //   accounts,
-  // );
+  const {activeType} = useProxy(UseAddAccountStore);
+  if (item.type !== activeType) {
+    return null;
+  }
+  const onConfirm = () => {
+    if (item.id) {
+      UseAddAccountStore.removeAccount(item.id);
+    }
+    removeModalRef?.current?.close();
+  };
 
   return (
-    <StyledView className={'w-full h-full bg-lime-300'}>
-      <Title />
-      <StyledText className={'text-[24px] font-bold bg-blue-300'}>
-        {type}
-      </StyledText>
-      <StyledTouchableOpacity
-        activeOpacity={0.6}
-        onPress={() => {
-          console.log('点击了');
-          addAccountRef?.current?.open();
-        }}
-        className={'absolute right-[30] bottom-[60]'}>
+    <StyledTouchableOpacity
+      onPress={() => {
+        console.log('长按了', item.account);
+        addAccountRef?.current?.open(item);
+      }}
+      onLongPress={() => {
+        LayoutAnimation.easeInEaseOut();
+        removeModalRef?.current?.open({
+          title: '删除账号?',
+          content: `是否确定删除账号：${item.account}`,
+          onConfirm,
+          onCancel: () => {
+            removeModalRef?.current?.close();
+          },
+        } as DeleteModalProps);
+      }}
+      className={'  bg-white p-[10] border-t border-box border-slate-300'}>
+      <StyledText className={'text-[18px] font-bold'}>{item.name}</StyledText>
+      <StyledView className={'flex-row items-center mt-[10]'}>
+        <StyledText className={'text-[16px] flex-1 text-stone-500'}>
+          账号： {item.account}
+        </StyledText>
+        <StyledText className={'text-[16px] flex-1 text-stone-500'}>
+          密码： {item.password}
+        </StyledText>
+      </StyledView>
+    </StyledTouchableOpacity>
+  );
+};
+
+const HeaderIcon = ({type}: {type: string}) => {
+  switch (type) {
+    case '游戏':
+      return (
         <Icon
-          type={'antdesign'}
-          name="pluscircle"
-          size={50}
+          type={'entypo'}
+          name={'game-controller'}
+          size={30}
           color={'#0ea5ee'}
         />
-      </StyledTouchableOpacity>
-      <AddAccount mRef={addAccountRef} />
+      );
+    case '平台':
+      return (
+        <Icon
+          type={'font-awesome'}
+          name={'building'}
+          size={30}
+          color={'#0ea5ee'}
+        />
+      );
+    case '银行':
+      return (
+        <Icon type={'antdesign'} name={'bank'} size={30} color={'#0ea5ee'} />
+      );
+    case '其他':
+      return (
+        <Icon
+          type={'material-community'}
+          name={'more'}
+          size={30}
+          color={'#0ea5ee'}
+        />
+      );
+    default:
+      return (
+        <Icon type={'antdesign'} name={'user'} size={30} color={'#0ea5ee'} />
+      );
+  }
+};
+
+const ArrowIcon = ({type}: {type: string}) => {
+  const {activeType, setActiveType} = useProxy(UseAddAccountStore);
+  return (
+    <StyledTouchableOpacity
+      className={'p-[10]'}
+      onPress={() => {
+        LayoutAnimation.easeInEaseOut();
+        setActiveType(type);
+      }}>
+      <Icon
+        type={'antdesign'}
+        // name={`${activeType === type ? 'down' : 'right'}`}
+        name={'down'}
+        size={20}
+        color={'#0ea5ee'}
+        style={{
+          transform: [{rotate: activeType === type ? '0deg' : '-90deg'}],
+        }}
+      />
+    </StyledTouchableOpacity>
+  );
+};
+
+const RenderHeader = ({section}: {section: SectionListData<IAccountItem>}) => {
+  const {activeType} = useProxy(UseAddAccountStore);
+
+  return (
+    <StyledView
+      className={`bg-white rounded-t-lg mt-[20] ${
+        section.type !== activeType ? 'rounded-b-lg' : ''
+      }`}>
+      <StyledView className={'flex-row items-center justify-between p-[10]'}>
+        <StyledView className={'flex-row items-center'}>
+          <HeaderIcon type={section.type} />
+          <StyledText className={'text-xl font-bold ml-[10]'}>
+            {section.type}
+          </StyledText>
+        </StyledView>
+        <ArrowIcon type={section.type} />
+      </StyledView>
     </StyledView>
+  );
+};
+const sectionStyle = StyleSheet.create({
+  container: {
+    paddingHorizontal: 20,
+    paddingBottom: 50,
+    // backgroundColor: 'skyblue',
+  },
+});
+
+function SectionListCom() {
+  const {accounts, initialAccounts} = useProxy(UseAddAccountStore);
+  useEffect(() => {
+    initialAccounts();
+  }, [initialAccounts]);
+  /**
+   * 根据accounts中的type字段，建立分组数据，格式为[{type: string, data: IAccountItem}]
+   */
+  const sectionListData = useMemo(() => {
+    return accounts.reduce((prev, cur) => {
+      const index = prev.findIndex(item => item.type === cur.type);
+      if (index === -1) {
+        prev.push({type: cur.type, data: [cur]});
+      } else {
+        prev[index].data.push(cur);
+      }
+      return prev;
+    }, []) as {type: string; data: IAccountItem[]}[];
+  }, [accounts]);
+  return (
+    <SectionList
+      sections={sectionListData}
+      keyExtractor={item => item.id}
+      renderItem={RenderItem}
+      renderSectionHeader={({section}) => <RenderHeader section={section} />}
+      contentContainerStyle={sectionStyle.container}
+    />
+  );
+}
+
+const MemoizedSectionListCom = memo(SectionListCom);
+
+interface AddAccountRefContextProps {
+  removeModalRef: MutableRefObject<IOpenDeleteModalRefProps | undefined>;
+  addAccountRef: MutableRefObject<IAddAccount | undefined>;
+}
+
+const AddAccountRefContext = createContext<
+  AddAccountRefContextProps | undefined
+>(undefined);
+
+function Home() {
+  const addAccountRef = useRef<IAddAccount>();
+  const removeModalRef = useRef<IOpenDeleteModalRefProps>();
+  const handlePress = useCallback(() => {
+    console.log('点击了');
+    addAccountRef?.current?.open();
+  }, [addAccountRef]);
+  return (
+    <AddAccountRefContext.Provider value={{addAccountRef, removeModalRef}}>
+      <StyledView className={'w-full h-full bg-gray-300'}>
+        <Title />
+        <MemoizedSectionListCom />
+        <StyledTouchableOpacity
+          activeOpacity={0.5}
+          onPress={handlePress}
+          className={'absolute right-[30] bottom-[60]'}>
+          <Icon
+            type={'antdesign'}
+            name="pluscircle"
+            size={50}
+            color={'#0ea5ee'}
+          />
+        </StyledTouchableOpacity>
+        <AddAccount mRef={addAccountRef} />
+        <DeleteModal mRef={removeModalRef} />
+      </StyledView>
+    </AddAccountRefContext.Provider>
   );
 }
 

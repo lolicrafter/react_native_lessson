@@ -1,6 +1,6 @@
 import {RefreshControl, SafeAreaView, SectionList} from 'react-native';
 import {StyledText, StyledView} from '../NativeWindComponent';
-import {SectionData} from '../../constants/Data';
+import {SectionData} from '@/constants/Data';
 import {useRef, useState} from 'react';
 import {Icon} from '@rneui/themed';
 
