@@ -70,9 +70,9 @@ def enableProguardInReleaseBuilds = false
 def jscFlavor = 'org.webkit:android-jsc:+'
 
 android {
-    ndkVersion rootProject.ext.ndkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
-    compileSdk rootProject.ext.compileSdkVersion
+    ndkVersion ndkVersion
+    buildToolsVersion buildToolsVersion
+    compileSdkVersion rootProject.ext.compileSdkVersion
 
     namespace "com.rndemo"
     defaultConfig {
@@ -89,6 +89,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            storeFile file('D:\\study\\rndemo\\android\\accountmanage.keystore.jks')
+            storePassword '123456'
+            keyAlias 'accountmanage'
+            keyPassword '123456'
+        }
     }
     buildTypes {
         debug {
@@ -97,9 +103,9 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
-            minifyEnabled enableProguardInReleaseBuilds
-            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
+//            minifyEnabled enableProguardInReleaseBuilds
+//            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
 }
