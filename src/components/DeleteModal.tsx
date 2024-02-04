@@ -8,7 +8,7 @@ export interface DeleteModalProps {
   onConfirm: () => void;
 }
 
-interface IOpenDeleteModalProps {
+export interface IOpenDeleteModalProps {
   open(data?: DeleteModalProps): void;
 
   close(): void;

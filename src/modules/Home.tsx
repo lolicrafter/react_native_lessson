@@ -16,7 +16,7 @@ import {
 } from 'react';
 import {IAccountItem, UseAddAccountStore} from '@/stores';
 import {useProxy} from 'valtio/utils';
-import withFloatBotton from '@/hoc/withFloatBotton';
+import withFloatButton from '@/hoc/withFloatButton';
 import {
   LayoutAnimation,
   SectionList,
@@ -25,8 +25,9 @@ import {
 } from 'react-native';
 import DeleteModal, {
   DeleteModalProps,
-  IOpenDeleteModalRefProps,
+  IOpenDeleteModalProps,
 } from '@/components/DeleteModal';
+import VisionCamera from '@/components/VisionCamera';
 
 interface IAddAccount {
   open(data?: IAccountItem): void;
@@ -223,7 +224,7 @@ function SectionListCom() {
 }
 
 interface AddAccountRefContextProps {
-  removeModalRef: MutableRefObject<IOpenDeleteModalRefProps | undefined>;
+  removeModalRef: MutableRefObject<IOpenDeleteModalProps | undefined>;
   addAccountRef: MutableRefObject<IAddAccount | undefined>;
 }
 
@@ -244,7 +245,7 @@ const AddAccountRefContext = createContext<
 
 function Home() {
   const addAccountRef = useRef<IAddAccount>();
-  const removeModalRef = useRef<IOpenDeleteModalRefProps>();
+  const removeModalRef = useRef<IOpenDeleteModalProps>();
   const handlePress = useCallback(() => {
     console.log('点击了');
     addAccountRef?.current?.open();
@@ -255,6 +256,8 @@ function Home() {
         className={'w-full h-full'}
         style={{backgroundColor: '#d1d5db'}}>
         <Title />
+        <VisionCamera />
+
         {/*<TestComponent />*/}
         <SectionListCom />
         <StyledTouchableOpacity
@@ -279,7 +282,7 @@ function Home() {
 const testCallBack = () => {
   console.log('home传递click');
 };
-export default withFloatBotton(Home, {
+export default withFloatButton(Home, {
   title: '新增账号',
   callback: testCallBack,
 });
