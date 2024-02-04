@@ -79,7 +79,12 @@ function Section({children, title}: SectionProps): React.JSX.Element {
 }
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+  const isDarkMode = useColorScheme() === 'light';
+  console.log(
+    '%c--🚀🚀🚀🚀🚀------App.tsx---注释所在行数83----Colors.darker😊===》',
+    'color: red;font-size:x-large',
+    Colors,
+  );
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -94,7 +99,7 @@ function App(): React.JSX.Element {
   // }, []);
 
   return (
-    <StyledSafeAreaView style={backgroundStyle}>
+    <StyledSafeAreaView>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}

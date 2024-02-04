@@ -7,7 +7,6 @@ import {Icon, Switch} from '@rneui/themed';
 import AddAccount from '@/components/AddAccount';
 import {
   createContext,
-  memo,
   MutableRefObject,
   useCallback,
   useContext,
@@ -87,7 +86,7 @@ const RenderItem = ({item}: {item: IAccountItem}) => {
           onConfirm,
         } as DeleteModalProps);
       }}
-      className={'  bg-white p-[10] border-t border-box border-slate-300'}>
+      className={'bg-white p-[10] border-t border-box border-slate-300'}>
       <StyledText className={'text-[18px] font-bold'}>{item.name}</StyledText>
       <StyledView className={'flex-row items-center mt-[10]'}>
         <StyledText className={'text-[16px] flex-1 text-stone-500'}>
@@ -188,7 +187,7 @@ const sectionStyle = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
     paddingBottom: 50,
-    // backgroundColor: 'skyblue',
+    // backgroundColor: '#ffffff',
   },
 });
 
@@ -200,7 +199,6 @@ function SectionListCom() {
   /**
    * 根据accounts中的type字段，建立分组数据，格式为[{type: string, data: IAccountItem}]
    */
-  LayoutAnimation.easeInEaseOut();
   const sectionListData = useMemo(() => {
     return accounts.reduce((prev, cur) => {
       const index = prev.findIndex(item => item.type === cur.type);
@@ -223,8 +221,6 @@ function SectionListCom() {
   );
 }
 
-const MemoizedSectionListCom = memo(SectionListCom);
-
 interface AddAccountRefContextProps {
   removeModalRef: MutableRefObject<IOpenDeleteModalRefProps | undefined>;
   addAccountRef: MutableRefObject<IAddAccount | undefined>;
@@ -233,6 +229,17 @@ interface AddAccountRefContextProps {
 const AddAccountRefContext = createContext<
   AddAccountRefContextProps | undefined
 >(undefined);
+
+// const TestComponent = () => {
+//   return (
+//     <StyledView className={'h-[200] p-[30]'}>
+//       <StyledView
+//         className={'w-full h-[200]  justify-center items-center bg-white '}>
+//         <StyledText>test</StyledText>
+//       </StyledView>
+//     </StyledView>
+//   );
+// };
 
 function Home() {
   const addAccountRef = useRef<IAddAccount>();
@@ -243,9 +250,12 @@ function Home() {
   }, [addAccountRef]);
   return (
     <AddAccountRefContext.Provider value={{addAccountRef, removeModalRef}}>
-      <StyledView className={'w-full h-full bg-gray-300'}>
+      <StyledView
+        className={'w-full h-full'}
+        style={{backgroundColor: '#d1d5db'}}>
         <Title />
-        <MemoizedSectionListCom />
+        {/*<TestComponent />*/}
+        <SectionListCom />
         <StyledTouchableOpacity
           activeOpacity={0.5}
           onPress={handlePress}
@@ -254,12 +264,13 @@ function Home() {
             type={'antdesign'}
             name="pluscircle"
             size={50}
+            // color={'#ffffff'}
             color={'#0ea5ee'}
           />
         </StyledTouchableOpacity>
-        <AddAccount mRef={addAccountRef} />
-        <DeleteModal mRef={removeModalRef} />
       </StyledView>
+      <AddAccount mRef={addAccountRef} />
+      <DeleteModal mRef={removeModalRef} />
     </AddAccountRefContext.Provider>
   );
 }
