@@ -18,7 +18,7 @@ export interface IOpenDeleteModalRefProps {
   mRef: MutableRefObject<IOpenDeleteModalProps | undefined>;
 }
 
-const DeleteModal = IOpenDeleteModalRefProps => {
+const DeleteModal = (props: IOpenDeleteModalRefProps) => {
   const [isVisible, setVisible] = React.useState(false);
   const onCancel = () => {
     setVisible(false);
@@ -30,7 +30,7 @@ const DeleteModal = IOpenDeleteModalRefProps => {
       onConfirm: () => {},
     });
   const {title, content, onConfirm} = deleteModalProps;
-  useImperativeHandle(IOpenDeleteModalRefProps.mRef, () => ({
+  useImperativeHandle(props.mRef, () => ({
     open: (data?: DeleteModalProps) => {
       setVisible(true);
       if (data) {
