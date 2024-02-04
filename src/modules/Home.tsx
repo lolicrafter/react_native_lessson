@@ -16,6 +16,7 @@ import {
 } from 'react';
 import {IAccountItem, UseAddAccountStore} from '@/stores';
 import {useProxy} from 'valtio/utils';
+import withFloatBotton from '@/hoc/withFloatBotton';
 import {
   LayoutAnimation,
   SectionList,
@@ -275,4 +276,10 @@ function Home() {
   );
 }
 
-export default Home;
+const testCallBack = () => {
+  console.log('home传递click');
+};
+export default withFloatBotton(Home, {
+  title: '新增账号',
+  callback: testCallBack,
+});
